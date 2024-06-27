@@ -12,6 +12,7 @@ use Filament\Forms\Form;
 use Filament\Forms\Get;
 use Filament\Forms\Set;
 use Filament\Resources\Resource;
+use Filament\Support\Enums\MaxWidth;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
@@ -29,7 +30,6 @@ class PostResource extends Resource
         return $form
             ->schema([
                 Forms\Components\Section::make()->schema([
-
                     Forms\Components\TextInput::make('title')
                         ->columnSpanFull()
                         ->required()
@@ -110,7 +110,7 @@ class PostResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\EditAction::make()->slideOver()->modalWidth(MaxWidth::Full),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -130,8 +130,6 @@ class PostResource extends Resource
     {
         return [
             'index' => Pages\ListPosts::route('/'),
-            'create' => Pages\CreatePost::route('/create'),
-            'edit' => Pages\EditPost::route('/{record}/edit'),
         ];
     }
 }
