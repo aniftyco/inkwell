@@ -1,48 +1,38 @@
 <?php
 
-namespace App\Filament\Resources;
+namespace NiftyCo\Inkwell\Resources;
 
-use App\Enums\PostAccess;
-use App\Enums\PostStatus;
-use App\Filament\Resources\PostResource\Pages;
-use App\Models\Post;
-use Filament\Forms;
-use Filament\Forms\Form;
-use Filament\Forms\Get;
-use Filament\Forms\Set;
-use Filament\Resources\Resource;
-use Filament\Support\Colors\Color;
-use Filament\Support\Enums\MaxWidth;
-use Filament\Tables;
-use Filament\Tables\Table;
+use App\{Enums, Models};
+use Filament\{Forms, Tables, Resources, Support, Forms\Components, Tables\Columns, Support\Colors};
+use NiftyCo\Inkwell\Pages;
 use Illuminate\Support\Str;
 
-class PostResource extends Resource
+class Posts extends Resources\Resource
 {
-    protected static ?string $model = Post::class;
+    protected static ?string $model = Models\Post::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
     protected static ?string $recordTitleAttribute = 'title';
 
 
-    public static function form(Form $form): Form
+    public static function form(Forms\Form $form): Forms\Form
     {
         return $form
             ->schema([
-                Forms\Components\Section::make()->schema([
-                    Forms\Components\TextInput::make('title')
+                Components\Section::make()->schema([
+                    Components\TextInput::make('title')
                         ->columnSpanFull()
                         ->required()
                         ->live(debounce: 500)
-                        ->afterStateUpdated(function (Get $get, Set $set, ?string $old, ?string $state) {
+                        ->afterStateUpdated(function (Forms\Get $get, Forms\Set $set, ?string $old, ?string $state) {
                             if (($get('slug') ?? '') !== Str::slug($old)) {
                                 return;
                             }
 
                             $set('slug', Str::slug($state));
                         }),
-                    Forms\Components\MarkdownEditor::make('body')
+                    Components\MarkdownEditor::make('body')
                         ->required()
                         ->columnSpanFull(),
                 ])->columns([
@@ -50,29 +40,29 @@ class PostResource extends Resource
                         ])
                     ->columnSpan(2),
                 // Sidebar
-                Forms\Components\Section::make()->schema([
-                    Forms\Components\TextInput::make('slug')
+                Components\Section::make()->schema([
+                    Components\TextInput::make('slug')
                         ->required()
-                        ->unique(Post::class, 'slug', fn ($record) => $record),
-                    Forms\Components\Textarea::make('excerpt')
+                        ->unique(Models\Post::class, 'slug', fn ($record) => $record),
+                    Components\Textarea::make('excerpt')
                         ->required()
                         ->autosize()
                         ->columnSpanFull(),
-                    Forms\Components\Grid::make()->schema([
-                        Forms\Components\Select::make('status')
+                    Components\Grid::make()->schema([
+                        Components\Select::make('status')
                             ->native(false)
-                            ->options(PostStatus::class)
-                            ->default(PostStatus::DRAFT)
+                            ->options(Enums\PostStatus::class)
+                            ->default(Enums\PostStatus::DRAFT)
                             ->required()
                             ->columnSpan(1),
-                        Forms\Components\Select::make('access')
+                        Components\Select::make('access')
                             ->native(false)
-                            ->options(PostAccess::class)
-                            ->default(PostAccess::PUBLIC )
+                            ->options(Enums\PostAccess::class)
+                            ->default(Enums\PostAccess::PUBLIC )
                             ->required()
                             ->columnSpan(1),
                     ]),
-                    Forms\Components\Select::make('user_id')
+                    Components\Select::make('user_id')
                         ->label('Author')
                         ->relationship(name: 'user', titleAttribute: 'name')
                         ->native(false)
@@ -80,7 +70,7 @@ class PostResource extends Resource
                         ->preload()
                         ->default(fn () => auth()->id())
                         ->columnSpan(1),
-                    Forms\Components\DateTimePicker::make('published_at')
+                    Components\DateTimePicker::make('published_at')
                         ->native(false)
                         ->seconds(false)
                         ->closeOnDateSelection()
@@ -89,7 +79,7 @@ class PostResource extends Resource
             ])->columns(3);
     }
 
-    public static function table(Table $table): Table
+    public static function table(Tables\Table $table): Tables\Table
     {
         return $table
             ->searchable(false)
@@ -97,43 +87,36 @@ class PostResource extends Resource
             ->emptyStateIcon(static::$navigationIcon)
             ->emptyStateDescription('Once you write your first post, it will appear here.')
             ->columns([
-                Tables\Columns\TextColumn::make('title')->icon('heroicon-s-document'),
-                Tables\Columns\TextColumn::make('access')
+                Columns\TextColumn::make('title')->icon('heroicon-s-document'),
+                Columns\TextColumn::make('access')
                     ->badge()
-                    ->color(fn (Post $post) => match ($post->access) {
-                        PostAccess::PUBLIC => Color::Green,
-                        PostAccess::MEMBERS_ONLY => Color::Pink,
+                    ->color(fn (Models\Post $post) => match ($post->access) {
+                        Enums\PostAccess::PUBLIC => Colors\Color::Green,
+                        Enums\PostAccess::MEMBERS_ONLY => Colors\Color::Pink,
                     }),
-                Tables\Columns\TextColumn::make('user.name')
+                Columns\TextColumn::make('user.name')
                     ->label('Author')
                     ->sortable(),
-                Tables\Columns\TextColumn::make('published_at')
+                Columns\TextColumn::make('published_at')
                     ->dateTime()
                     ->sortable()
-                    ->formatStateUsing(fn (Post $post) => $post->published_at->format('j M Y, g:i A')),
+                    ->formatStateUsing(fn (Models\Post $post) => $post->published_at->format('j M Y, g:i A')),
             ])
             ->defaultSort('published_at', 'desc')
             ->actions([
-                Tables\Actions\EditAction::make()->slideOver()->modalWidth(MaxWidth::Full),
+                Tables\Actions\EditAction::make()->slideOver()->modalWidth(Support\Enums\MaxWidth::Full),
                 Tables\Actions\Action::make('delete')
                     ->requiresConfirmation()
-                    ->color(Color::Red)
+                    ->color(Colors\Color::Red)
                     ->icon('heroicon-o-trash')
-                    ->action(fn (Post $post) => $post->delete()),
+                    ->action(fn (Models\Post $post) => $post->delete()),
             ]);
-    }
-
-    public static function getRelations(): array
-    {
-        return [
-            //
-        ];
     }
 
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListPosts::route('/'),
+            'index' => Pages\Posts::route('/'),
         ];
     }
 }

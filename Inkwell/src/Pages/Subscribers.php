@@ -1,22 +1,19 @@
 <?php
 
-namespace App\Filament\Resources\SubscriberResource\Pages;
+namespace NiftyCo\Inkwell\Pages;
 
-use App\Filament\Resources\SubscriberResource;
-use Filament\Actions;
-use Filament\Resources\Components\Tab;
-use Filament\Resources\Pages\ListRecords;
-use Filament\Support\Enums\MaxWidth;
+use NiftyCo\Inkwell\Resources;
+use Filament\{Actions, Resources\Pages, Resources\Components, Support\Enums};
 use Illuminate\Database\Eloquent\Builder;
 
-class ListSubscribers extends ListRecords
+class Subscribers extends Pages\ListRecords
 {
-    protected static string $resource = SubscriberResource::class;
+    protected static string $resource = Resources\Subscribers::class;
 
     protected function getHeaderActions(): array
     {
         return [
-            Actions\CreateAction::make()->modalWidth(MaxWidth::Large),
+            Actions\CreateAction::make()->modalWidth(Enums\MaxWidth::Large),
         ];
     }
 
@@ -28,10 +25,10 @@ class ListSubscribers extends ListRecords
     public function getTabs(): array
     {
         return [
-            'confirmed' => Tab::make()
+            'confirmed' => Components\Tab::make()
                 ->modifyQueryUsing(fn (Builder $query) => $query->whereNotNull('confirmed_at')),
 
-            'unconfirmed' => Tab::make()
+            'unconfirmed' => Components\Tab::make()
                 ->modifyQueryUsing(fn (Builder $query) => $query->whereNull('confirmed_at')),
 
         ];
