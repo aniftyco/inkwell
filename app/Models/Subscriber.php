@@ -13,4 +13,7 @@ class Subscriber extends Model
 
     protected $guarded = ['id'];
 
+    protected $casts = [
+        'confirmed_at' => 'datetime',
+    ];
 }

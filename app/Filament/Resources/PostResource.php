@@ -5,18 +5,16 @@ namespace App\Filament\Resources;
 use App\Enums\PostAccess;
 use App\Enums\PostStatus;
 use App\Filament\Resources\PostResource\Pages;
-use App\Filament\Resources\PostResource\RelationManagers;
 use App\Models\Post;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Forms\Get;
 use Filament\Forms\Set;
 use Filament\Resources\Resource;
+use Filament\Support\Colors\Color;
 use Filament\Support\Enums\MaxWidth;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Illuminate\Support\Str;
 
 class PostResource extends Resource
@@ -24,6 +22,9 @@ class PostResource extends Resource
     protected static ?string $model = Post::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+
+    protected static ?string $recordTitleAttribute = 'title';
+
 
     public static function form(Form $form): Form
     {
@@ -77,13 +78,13 @@ class PostResource extends Resource
                         ->native(false)
                         ->required()
                         ->preload()
-                        ->searchable()
                         ->default(fn () => auth()->id())
                         ->columnSpan(1),
                     Forms\Components\DateTimePicker::make('published_at')
                         ->native(false)
                         ->seconds(false)
-                        ->closeOnDateSelection(),
+                        ->closeOnDateSelection()
+                        ->default(fn () => now()),
                 ])->columnSpan(1)
             ])->columns(3);
     }
@@ -91,31 +92,34 @@ class PostResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
+            ->searchable(false)
+            ->selectable(false)
+            ->emptyStateIcon(static::$navigationIcon)
+            ->emptyStateDescription('Once you write your first post, it will appear here.')
             ->columns([
-                Tables\Columns\TextColumn::make('title')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('status')
-                    ->searchable(),
+                Tables\Columns\TextColumn::make('title')->icon('heroicon-s-document'),
                 Tables\Columns\TextColumn::make('access')
-                    ->searchable(),
+                    ->badge()
+                    ->color(fn (Post $post) => match ($post->access) {
+                        PostAccess::PUBLIC => Color::Green,
+                        PostAccess::MEMBERS_ONLY => Color::Pink,
+                    }),
                 Tables\Columns\TextColumn::make('user.name')
                     ->label('Author')
-                    ->sortable()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('published_at')
                     ->dateTime()
-                    ->sortable(),
+                    ->sortable()
+                    ->formatStateUsing(fn (Post $post) => $post->published_at->format('j M Y, g:i A')),
             ])
-            ->filters([
-                //
-            ])
+            ->defaultSort('published_at', 'desc')
             ->actions([
                 Tables\Actions\EditAction::make()->slideOver()->modalWidth(MaxWidth::Full),
-            ])
-            ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
-                ]),
+                Tables\Actions\Action::make('delete')
+                    ->requiresConfirmation()
+                    ->color(Color::Red)
+                    ->icon('heroicon-o-trash')
+                    ->action(fn (Post $post) => $post->delete()),
             ]);
     }
 
