@@ -2,7 +2,8 @@
 
 ## About Inkwell
 
-@TODO
+> [!CAUTION]
+> This package is not ready for general usage.
 
 ## License
 
