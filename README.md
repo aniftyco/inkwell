@@ -1,66 +1,9 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+<p align="center"><a href="https://laravel.com" target="_blank"><svg width="391" height="95" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M29.5 0L14.046 93.09H0L15.454 0H29.5zM48.744 51.636l-6.819 41.455h-13.59L39.97 23.273h13.045l-1.909 11.363h.864c2.212-3.727 5.227-6.697 9.045-8.909 3.849-2.242 8.394-3.363 13.637-3.363 4.727 0 8.697 1 11.909 3 3.242 1.97 5.53 4.909 6.864 8.818 1.363 3.909 1.575 8.742.636 14.5L86.607 93.09h-13.59l7.136-42.773c.818-5.06.151-9.015-2-11.863-2.122-2.88-5.5-4.319-10.137-4.319-3.151 0-6.075.682-8.772 2.046-2.667 1.363-4.925 3.363-6.773 6-1.818 2.606-3.06 5.757-3.727 9.454zM116.078 69.41l2.591-16.592h2.409l32.818-29.545h16.273l-37.273 33.636h-2.136l-14.682 12.5zM99.669 93.09L115.124 0h13.591L113.26 93.09H99.67zm44.091 0l-19.455-33.18 10.864-9.5 25.273 42.68H143.76zM180.935 93.09l-8.909-69.817h14.046l5.136 51.273h.682l22.273-51.273h14.045l5.091 51.045h.682l22.136-51.045h14.046L238.026 93.09h-13.863l-5.818-50.41h-1.046l-22.545 50.41h-13.819zM294.088 94.5c-6.848 0-12.515-1.47-17-4.41-4.454-2.969-7.576-7.136-9.363-12.5-1.788-5.393-2.076-11.711-.864-18.954 1.182-7.151 3.56-13.454 7.136-18.909 3.576-5.454 8.031-9.712 13.364-12.772 5.364-3.061 11.288-4.591 17.773-4.591 3.939 0 7.651.651 11.136 1.954 3.515 1.303 6.5 3.349 8.955 6.136 2.454 2.788 4.151 6.41 5.09 10.864.97 4.424.94 9.803-.09 16.137l-.773 4.818h-55.546l1.591-10.182h42.182c.636-3.576.47-6.742-.5-9.5-.97-2.788-2.636-4.985-5-6.591-2.333-1.606-5.273-2.41-8.818-2.41-3.636 0-7.03.955-10.182 2.864a26.463 26.463 0 0 0-7.909 7.319c-2.091 2.94-3.409 5.97-3.955 9.09l-1.59 9.319c-.788 5.09-.652 9.182.409 12.272 1.091 3.092 3 5.334 5.727 6.728 2.727 1.394 6.136 2.09 10.227 2.09 2.637 0 5.076-.363 7.318-1.09 2.273-.758 4.288-1.864 6.046-3.318 1.757-1.485 3.227-3.334 4.409-5.546l12.454 2.318c-1.666 3.788-4.06 7.106-7.181 9.955-3.122 2.818-6.803 5.015-11.046 6.59-4.212 1.546-8.879 2.319-14 2.319zM363.48 0l-15.455 93.09h-13.591L349.889 0h13.591zM390.235 0L374.78 93.09h-13.591L376.644 0h13.591z" fill="#000"/></svg></a></p>
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## About Inkwell
 
-## About Laravel
-
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
-
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
-
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
-
-## Learning Laravel
-
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
-
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
-
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
-
-## Laravel Sponsors
-
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
-
-### Premium Partners
-
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+@TODO
 
 ## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Inkwell is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
