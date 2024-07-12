@@ -10,6 +10,10 @@ class InkwellServiceProvider extends Support\ServiceProvider
     public function boot(): void
     {
         $this->loadViewsFrom(__DIR__.'/../views', 'inkwell');
+
+
+        Support\Facades\Route::get('/', Controllers\PostIndexController::class)->name('posts.index');
+        Support\Facades\Route::get('/{slug}', Controllers\PostShowController::class)->name('posts.show');
     }
 
     public function register(): void
