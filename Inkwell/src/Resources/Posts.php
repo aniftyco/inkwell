@@ -48,6 +48,15 @@ class Posts extends Resources\Resource
                         ->required()
                         ->autosize()
                         ->columnSpanFull(),
+                    Components\FileUpload::make('og_image')
+                        ->image()
+                        ->maxSize(2048)
+                        ->imageResizeMode('cover')
+                        ->imageCropAspectRatio('1.91:1')
+                        ->imageResizeTargetWidth(1200)
+                        ->imageResizeTargetHeight(628)
+                        ->disk('public')
+                        ->directory('posts'),
                     Components\Grid::make()->schema([
                         Components\Select::make('status')
                             ->native(false)
