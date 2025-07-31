@@ -2,43 +2,50 @@
 
 namespace App\Models;
 
-use App\Enums\{PostAccess, PostStatus};
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Inkwell\Database\Factories\PostFactory;
 
 class Post extends Model
 {
-    use HasFactory, HasUuids, SoftDeletes;
+    /** @use HasFactory<\Inkwell\Database\Factories\PostFactory> */
+    use HasFactory;
+
+    use HasUuids;
+    use SoftDeletes;
 
     protected $guarded = ['id'];
 
     protected $casts = [
         'published_at' => 'datetime',
-        'access' => PostAccess::class,
-        'status' => PostStatus::class,
     ];
+
+    protected static function newFactory(): PostFactory
+    {
+        return PostFactory::new();
+    }
 
     public function scopePublished(Builder $query): Builder
     {
-        return $query->where('status', PostStatus::PUBLISHED);
+        return $query->whereNotNull('published_at')->where('published_at', '<=', now());
     }
 
     public function scopeScheduled(Builder $query): Builder
     {
-        return $query->where('status', PostStatus::SCHEDULED);
+        return $query->whereNotNull('published_at')->where('published_at', '>', now());
     }
 
     public function scopeDrafts(Builder $query): Builder
     {
-        return $query->where('status', PostStatus::DRAFT);
+        return $query->whereNull('published_at');
     }
 
-    public function user(): BelongsTo
+    public function author(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id');
     }
 }

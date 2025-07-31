@@ -1,0 +1,9 @@
+@import 'tailwindcss';
+@source "../views";
+
+@plugin "@tailwindcss/forms";
+@plugin "@tailwindcss/typography";
+
+@theme {
+  --color-accent: var(--accent-color, var(--color-slate-800));
+}
