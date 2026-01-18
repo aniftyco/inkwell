@@ -4,8 +4,75 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8d1006712626ac427987b1021e59fbe6",
+    "content-hash": "2d6ab34288176465c582510fde29cb54",
     "packages": [
+        {
+            "name": "aniftyco/laravel-attachments",
+            "version": "1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/aniftyco/laravel-attachments.git",
+                "reference": "ada4fa2774bf65a3578f232fad6c4fd6a9954c58"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/aniftyco/laravel-attachments/zipball/ada4fa2774bf65a3578f232fad6c4fd6a9954c58",
+                "reference": "ada4fa2774bf65a3578f232fad6c4fd6a9954c58",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/database": "^12.0",
+                "illuminate/http": "^12.0",
+                "php": "^8.3"
+            },
+            "require-dev": {
+                "filament/forms": "^4.3",
+                "filament/tables": "^4.3",
+                "illuminate/support": "^12.0",
+                "laravel/pint": "^1.26",
+                "orchestra/testbench": "^10.0",
+                "pestphp/pest": "^4.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "NiftyCo\\Attachments\\AttachmentsServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "NiftyCo\\Attachments\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "NiftyCo, LLC",
+                    "homepage": "https://aniftyco.com"
+                },
+                {
+                    "name": "Josh Manders",
+                    "homepage": "https://x.com/joshmanders"
+                }
+            ],
+            "description": "Turn any field on your Eloquent models into attachments",
+            "homepage": "https://github.com/aniftyco/laravel-attachments",
+            "keywords": [
+                "attachments",
+                "eloquent",
+                "laravel"
+            ],
+            "support": {
+                "issues": "https://github.com/aniftyco/laravel-attachments/issues",
+                "source": "https://github.com/aniftyco/laravel-attachments/tree/1.0.1"
+            },
+            "time": "2026-01-13T08:36:45+00:00"
+        },
         {
             "name": "brick/math",
             "version": "0.14.1",
@@ -9415,7 +9482,7 @@
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
-        "php": "^8.2"
+        "php": "^8.4"
     },
     "platform-dev": {},
     "plugin-api-version": "2.9.0"
