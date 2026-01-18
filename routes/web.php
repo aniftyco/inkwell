@@ -1,7 +1,5 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
+use NiftyCo\Inkwell\Facades\Inkwell;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Inkwell::routes();
